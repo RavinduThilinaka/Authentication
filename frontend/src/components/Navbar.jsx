@@ -13,10 +13,15 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
+import HomeIcon from '@mui/icons-material/Home';
+import InfoIcon from '@mui/icons-material/Info';
+import { Link,useLocation } from 'react-router-dom';
 
 const drawerWidth = 240;
 
-export default function Navbar() {
+export default function Navbar({ content }) { 
+  const location = useLocation()
+  const path = location.pathname // ✅ receive 'content' as prop
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
@@ -38,35 +43,32 @@ export default function Navbar() {
         <Toolbar />
         <Box sx={{ overflow: 'auto' }}>
           <List>
-            {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-              <ListItem key={text} disablePadding>
-                <ListItemButton>
+          
+              <ListItem key={1} disablePadding>
+                <ListItemButton component={Link} to="/home" selected={"/home" ===path}>
                   <ListItemIcon>
-                    {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                    <HomeIcon />
                   </ListItemIcon>
-                  <ListItemText primary={text} />
+                  <ListItemText primary={"Home"} />
                 </ListItemButton>
               </ListItem>
-            ))}
-          </List>
-          <Divider />
-          <List>
-            {['All mail', 'Trash', 'Spam'].map((text, index) => (
-              <ListItem key={text} disablePadding>
-                <ListItemButton>
+
+              <ListItem key={1} disablePadding>
+                 <ListItemButton component={Link} to="/about" selected={"/about" ===path}>
                   <ListItemIcon>
-                    {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                    <InfoIcon />
                   </ListItemIcon>
-                  <ListItemText primary={text} />
+                  <ListItemText primary={"About"} />
                 </ListItemButton>
               </ListItem>
-            ))}
+          
           </List>
+          
         </Box>
       </Drawer>
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
         <Toolbar />
-            {content}
+        {content} {/* ✅ now it’s defined */}
       </Box>
     </Box>
   );
