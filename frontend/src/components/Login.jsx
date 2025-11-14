@@ -1,8 +1,9 @@
 import React from 'react'
-
+import '../App.css'
+import {box} from "@mui/material"
 function Login() {
   return (
-    <div>Login</div>
+    <div className='myBackground'>Login</div>
   )
 }
 
