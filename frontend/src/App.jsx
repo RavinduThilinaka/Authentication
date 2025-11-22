@@ -4,6 +4,7 @@ import Register from "./components/Register";
 import Login from "./components/Login";
 import Navbar from "./components/Navbar";
 import About from "./components/About";
+import ProtectedRoutes from "./components/ProtectedRoutes";
 
 function AppRoutes() {
   const location = useLocation();
@@ -20,8 +21,11 @@ function AppRoutes() {
         <Navbar
           content={
             <Routes>
-              <Route path="/home" element={<Home />} />
-              <Route path="/about" element={<About />} />
+              <Route element={<ProtectedRoutes/>}>
+                  <Route path="/home" element={<Home />} />
+                  <Route path="/about" element={<About />} />
+              </Route>
+              
             </Routes>
           }
         />
