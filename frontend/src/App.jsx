@@ -21,7 +21,7 @@ function AppRoutes() {
         <Navbar
           content={
             <Routes>
-              <Route element={<ProtectedRoutes/>}>
+             <Route element={<ProtectedRoutes/>}>
                   <Route path="/home" element={<Home />} />
                   <Route path="/about" element={<About />} />
               </Route>
