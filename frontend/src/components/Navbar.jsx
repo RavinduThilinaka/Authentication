@@ -15,11 +15,24 @@ import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
 import HomeIcon from '@mui/icons-material/Home';
 import InfoIcon from '@mui/icons-material/Info';
-import { Link,useLocation } from 'react-router-dom';
+import LogoutIcon from '@mui/icons-material/Logout';
+import { Link,useLocation, useNavigate } from 'react-router-dom';
+import AxiosInstance from './AxiosInstance';
+
 
 const drawerWidth = 240;
 
 export default function Navbar({ content }) { 
+  const navigate = useNavigate()
+  const logoutUser = () =>{
+    AxiosInstance.post(`logout/`,{
+
+    })
+    .then(() =>{
+      localStorage.removeItem("Token")
+      navigate("/")
+    })
+  }
   const location = useLocation()
   const path = location.pathname // ✅ receive 'content' as prop
   return (
@@ -53,12 +66,21 @@ export default function Navbar({ content }) {
                 </ListItemButton>
               </ListItem>
 
-              <ListItem key={1} disablePadding>
+              <ListItem key={2} disablePadding>
                  <ListItemButton component={Link} to="/about" selected={"/about" ===path}>
                   <ListItemIcon>
                     <InfoIcon />
                   </ListItemIcon>
                   <ListItemText primary={"About"} />
+                </ListItemButton>
+              </ListItem>
+
+              <ListItem key={3} disablePadding>
+                 <ListItemButton onClick={logoutUser}>
+                  <ListItemIcon>
+                    <LogoutIcon />
+                  </ListItemIcon>
+                  <ListItemText primary={"Logout"} />
                 </ListItemButton>
               </ListItem>
           
